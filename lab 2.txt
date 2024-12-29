@@ -1,0 +1,40 @@
+package main 
+import "fmt" 
+
+type BankAccount struct { 
+    accountHolder string 
+    balance float64       
+} 
+ 
+
+func (b *BankAccount) Deposit(amount float64) { 
+    b.balance += amount 
+    fmt.Printf("Deposited: %.2f\n", amount) 
+} 
+ 
+func (b *BankAccount) Withdraw(amount float64) { 
+    if amount > b.balance { 
+        fmt.Println("Insufficient funds!") 
+    } else { 
+        b.balance -= amount 
+        fmt.Printf("Withdrawn: %.2f\n", amount) 
+    } 
+} 
+ 
+func (b *BankAccount) CheckBalance() float64 { 
+    return b.balance 
+} 
+func main() { 
+
+    account := BankAccount{accountHolder: "John Doe", balance: 1000.0} 
+
+    account.Deposit(500) 
+
+    account.Withdraw(300) 
+ 
+    fmt.Printf("Current balance: %.2f\n", account.CheckBalance()) 
+
+    account.Withdraw(1500) 
+
+    fmt.Printf("Balance after withdrawal: %.2f\n", account.CheckBalance()) 
+}
